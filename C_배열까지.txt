@@ -1,0 +1,359 @@
+1. 
+#include <stdio.h>
+
+void fun(int a){
+    a += 2;
+    printf("fun a = %d\n", a);
+}
+
+int main()
+{
+    int a = 10;
+    fun(a);
+    printf("main a = %d\n", a);
+
+    return 0;
+}
+
+2. 
+void fun(int a){
+    a += 2;
+    printf("fun a = %d\n", a);
+}
+
+int main()
+{
+    int a = 10;
+    fun(a);
+    fun(a);
+    printf("main a = %d\n", a);
+
+    return 0;
+}
+
+3.
+int fun(int a, int b){
+    int c = a + b;
+    printf("fun c = %d\n", c);
+    return c;
+}
+
+int main()
+{
+    int a = 10, b = 5;
+    int c = fun(a, b);
+    printf("main c = %d\n", c);
+    return 0;
+}
+
+4.
+int add(int a){
+    a++;
+    return a;
+}
+int calc(int a){
+    int b = add(a);
+    b *= 2;
+    return b;
+}
+
+int main()
+{
+    int a = 3;
+    int b = calc(a);
+    printf("main b = %d\n", b);
+    return 0;
+}
+
+지역변수
+5.
+int main()
+{
+    int a = 3;
+    if(1){
+        int b = 20;
+        printf("%d %d\n", a, b);
+    }
+    printf("a = %d\n", a);
+    // printf("b = %d\n", b);
+    return 0;
+}
+
+전역변수
+6. 
+int a = 5;
+
+int main()
+{
+    if(1){
+        int b = 20;
+        printf("%d %d\n", a, b);
+    }
+    a = 10;
+    printf("a = %d\n", a);
+    return 0;
+}
+
+7. 
+int a = 5;
+void fun(){
+    a = 20;
+}
+
+int main()
+{
+    if(1){
+        int b = 20;
+        printf("%d %d\n", a, b);
+    }
+    a = 10;
+    fun();
+    printf("a = %d\n", a);
+    return 0;
+}
+
+정적변수
+8.
+void fun(){
+    static int a = 20;
+    a--;
+    printf("a = %d\n", a);
+}
+
+int main()
+{
+    int a = 5;
+    fun();
+    a = 10;
+    fun();
+    printf("main a = %d", a);
+    return 0;
+}
+
+매개변수
+9. 
+void fun(int a, int b){
+    printf("a = %d, b = %d\n", a, b);
+    int c = a + b;
+    printf("c = %d\n", c);
+}
+
+int main()
+{
+    int x = 5, a = 10;
+    fun(x, a);
+    return 0;
+}
+
+
+10.
+int main()
+{
+    int a = 5;
+    {
+        int a = 10;
+        printf("%d\n", a);
+    }
+    {
+        int a = 15;
+        printf("%d\n", a);
+    }
+    printf("%d\n", a);
+    return 0;
+}
+
+11.
+void fun(){
+    static int a = 10;
+    int b = 1;
+    a += 2;
+    b += 2;
+    printf("%d %d\n", a, b);
+}
+
+int main()
+{
+    int a = 5;
+    int b = 3;
+    fun();
+    fun();
+    fun();
+    printf("%d %d\n", a, b);
+    return 0;
+}
+
+재귀함수
+12.
+int fact(int n){
+    if (n == 0) return 1;
+    return n * fact(n-1);
+}
+
+int main()
+{
+    int a = 3;
+    int result = fact(a);
+    printf("%d! = %d\n", a, result);
+    return 0;
+}
+
+13.
+void down(int n){
+    if (n == 0) return;
+    down(n-1);
+    printf("%d ", n);
+}
+
+int main()
+{
+    int a = 3;
+    down(a);
+    return 0;
+}
+
+14.
+int fun(int n){
+    if (n <= 1) return 1;
+    return n + fun(n - 2);
+}
+
+int main()
+{
+    printf("%d", fun(5));
+    return 0;
+}
+
+15.
+int fun(int n){
+    if (n <= 1) return 1;
+    int a = fun(n - 1);
+    return a * 2 + n;
+}
+
+int main()
+{
+    printf("%d", fun(5));
+    return 0;
+}
+
+전처리기
+16.
+#include <stdio.h>
+#define N 5
+int main()
+{
+    printf("%d", N);
+    return 0;
+}
+
+17.
+#include <stdio.h>
+#define DOU(a) (a * a)
+int main()
+{
+    printf("%d", DOU(3+1));
+    return 0;
+}
+
+18.
+#include <stdio.h>
+#define DOU(a) ((a) * (a))
+int main()
+{
+    printf("%d", DOU(3+1));
+    return 0;
+}
+
+배열 : 물리적으로 연속적인 메모리 공간
+배열 요소
+인덱스
+배열 선언 : int a[5];
+
+19.
+int main()
+{
+    int arr[3];
+    for(int i = 0; i<3; i++){
+        arr[i] = i+2;
+    }
+    for(int i = 0; i<3; i++){
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+20.
+int main()
+{
+    int arr[3] = {1, 2, 3};
+    for(int i = 0; i<3; i++){
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+21. 
+int main()
+{
+    int arr[3] = {5, 10, 15};
+    arr[1] += 5;
+    printf("%d ", arr[1]);
+    return 0;
+}
+
+22.
+int main()
+{
+    int arr[5] = {5, 2, 7, 9, 4};
+    int max = arr[0];
+    int length = sizeof(arr) / sizeof(arr[0]);
+    for(int i = 1; i < length; i++){
+        if( max < arr[i])
+            max = arr[i];
+    }
+    printf("%d \n", max);
+    printf("%d, %d", sizeof(arr), sizeof(arr[0]));
+    return 0;
+}
+
+23.
+void cng(int a){
+    a += 10;
+}
+
+int main()
+{
+    int arr[3] = {5, 2, 7};
+    cng(arr[1]);
+    printf("%d, %d, %d\n", arr[0], arr[1], arr[2]);
+    return 0;
+}
+
+24.
+void cng(int a[]){
+    a[1] += 10;
+}
+
+int main()
+{
+    int arr[3] = {5, 2, 7};
+    cng(arr);
+    printf("%d, %d, %d\n", arr[0], arr[1], arr[2]);
+    return 0;
+}
+
+25.
+void cng(int a[]){
+    int temp = a[0];
+    a[0] = a[1];
+    a[1] = temp;
+}
+
+int main()
+{
+    int arr[3] = {5, 2, 7};
+    printf("변환 전 : %d, %d, %d\n", arr[0], arr[1], arr[2]);
+    cng(arr);
+    printf("변환 후 : %d, %d, %d\n", arr[0], arr[1], arr[2]);
+    return 0;
+}
