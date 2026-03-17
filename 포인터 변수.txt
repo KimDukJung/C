@@ -1,0 +1,90 @@
+포인터 변수
+
+1.
+int main()
+{
+    int a = 5;
+    int * pt = &a;
+    printf("%d , %d, %d\n", a, pt, *pt);
+    *pt = 10;
+    printf("%d , %d, %d", a, pt, *pt);
+    return 0;
+}
+
+2.
+void calc(int a){
+    a += 10;
+}
+
+int main()
+{
+    int a = 5;
+    int * pt = &a;
+    calc(a);
+    *pt += 10;
+    printf("%d", a);
+    return 0;
+}
+
+3.
+int main()
+{
+    int a = 5;
+    int * pt = &a;
+    int * b = pt;
+    *b += 3;
+    *pt += 5;
+    printf("%d\n", a);
+    printf("%d", *b);
+    return 0;
+}
+
+배열과 포인터
+
+4.
+int main()
+{
+    int a[3] = {5, 10, 15};
+    int * pa = a;
+    for(int i = 0; i<=2; i++){
+        printf("a[] = %d\n", a[i]);
+        printf("*(pa+i) = %d\n", *(pa+i));
+        printf("pa[] = %d\n", pa[i]);
+    }
+    
+    return 0;
+}
+
+5.
+int main()
+{
+    int a[5] = {5, 10, 15, 20, 25};
+    int * pa = a;
+    printf("%d, %d, %d, %d\n", a[2], *a+2, *(pa+1), pa[3]);
+
+    return 0;
+}
+
+6.
+int main()
+{
+    int a[5] = {5, 10, 15, 20, 25};
+    int * pa = a+2;
+    printf("%d, %d, %d, %d\n", a[2], *a+2, *(pa+1), pa[2]);
+
+    return 0;
+}
+
+7. 
+int main()
+{
+    int a[5] = {5, 10, 15, 20, 25};
+    int * pa = &a[2];
+    pa++;
+    *pa += 5;
+    for(int i =0;i<5;i++){
+        printf("a[] = %d ", a[i]);
+        printf("*(pa+i) = %d \n", *(pa+i));
+    }
+    return 0;
+}
