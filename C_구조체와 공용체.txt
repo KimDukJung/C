@@ -1,0 +1,401 @@
+구조체
+
+1.
+#include <stdio.h>
+struct Human {
+	char name[30];
+	int age;
+};
+
+int main(){
+	struct Human h1 = {"Kim", 35};
+	printf("Name : %s\n", h1.name);
+	printf("Age : %d\n", h1.age);
+	return 0;
+}
+
+2. 
+#include <stdio.h>
+struct Human {
+	char name[30];
+	unsigned int age;
+};
+
+int main(){
+	struct Human h1 = {"Kim", 35};
+	h1.age += 5u;
+	printf("Name : %s\n", h1.name);
+	printf("Age : %d\n", h1.age);
+	return 0;
+}
+
+3. 
+#include <stdio.h>
+struct Human {
+	char name[30];
+	int age;
+	float heigt;
+};
+
+int main(){
+	struct Human h1 = {"Kim", 35, 175.3};
+	struct Human h2 = {"Park", 25, 182.7};
+	h2 = h1;
+	h1.age = 30;
+	h1.heigt = 181.5;
+	printf("%d, %.1f\n", h1.age, h1.heigt);
+	printf("%d, %.1f\n", h2.age, h2.heigt);
+	return 0;
+}
+
+4.
+#include <stdio.h>
+struct Human {
+	char name[30];
+	int age;
+	float heigt;
+};
+
+void change(struct Human h1){
+	h1.age += 10;
+	h1.heigt += 5.5;
+	printf("%d, %.1f\n", h1.age, h1.heigt);
+}
+int main(){
+	struct Human h1 = {"Kim", 35, 175.3};
+	struct Human h2 = {"Park", 25, 182.7};
+	change(h1);
+	printf("%d, %.1f\n", h1.age, h1.heigt);
+	printf("%d, %.1f\n", h2.age, h2.heigt);
+	return 0;
+}
+
+5.
+#include <stdio.h>
+struct Human {
+	char name;
+	int age;
+	float height;
+};
+int main(){
+	printf("%d\n", sizeof(struct Human));
+	return 0;
+}
+
+
+구조체 배열
+6.
+#include <stdio.h>
+struct Dot {
+	int x;
+	int y;
+};
+int main(){
+	struct Dot d[3] = { 1,2,3,4,5,6};
+	printf("%d %d\n", d[0].x, d[1].y);
+	return 0;
+}
+
+7. 
+#include <stdio.h>
+struct Jum {
+	int score;
+};
+int main(){
+	struct Jum d[3] = { 86, 90, 78};
+	int s = 0;
+	for(int i = 0 ;i <3; i++){
+		s += d[i].score;
+	}
+	printf("%d\n", s);
+	return 0;
+}
+
+8. 
+#include <stdio.h>
+struct Link {
+	int v;
+	int next;
+};
+int main(){
+	struct Link link[4] = { 10, 1, 30, 2, 50, 3, 60, -1};
+	int head = 0;
+	int del = 2;
+	int prev = 1;
+	link[prev].next = link[del].next;
+	link[del].next = -1;
+	int p = head;
+	while( p != -1){
+		printf("%d ", link[p].v);
+		p = link[p].next;
+	}
+	return 0;
+}
+
+
+구조체 포인터
+
+1.
+#include <stdio.h>
+struct Human {
+	char name[20];
+	int age;
+};
+int main(){
+	struct Human h = { "Kim", 25};
+	struct Human *p = &h;
+	p->age = p -> age + 1;
+	printf("%s %d", h.name, h.age);
+	return 0;
+}
+
+2.
+#include <stdio.h>
+struct Human {
+	char name[20];
+	int age;
+};
+int main(){
+	struct Human h1 = { "Kim", 25};
+	struct Human h2 = { "Lee", 35};
+	struct Human *p = &h1;
+	p->age = p -> age + 1;
+	p = &h2;
+	p->age = p -> age + 2;
+	printf("%d %d", h1.age, h2.age);
+	return 0;
+}
+
+3.
+#include <stdio.h>
+struct Human {
+	char name[20];
+	int age;
+};
+
+void upAge(struct Human *p){
+	p->age += 3;
+}
+int main(){
+	struct Human h1 = { "Kim", 25};
+	upAge(&h1);
+	printf("%s %d", h1.name, h1.age);
+	return 0;
+}
+
+4.
+#include <stdio.h>
+struct Human {
+	char name[20];
+	int age;
+};
+
+int main(){
+	struct Human h[3] = { {"Kim", 25}, {"Lee", 22}, {"Park", 27} };
+	struct Human * p = h;
+	p->age += 1;
+	p++;
+	p->age += 2;
+	printf("%d %d %d", h[0].age, h[1].age, h[2].age);
+	return 0;
+}
+
+5.
+#include <stdio.h>
+struct Human {
+	char name[20];
+	int age;
+};
+
+int main(){
+	struct Human h[3] = { {"Kim", 25}, {"Lee", 22}, {"Park", 27} };
+//	struct Human * p[3] = {&h[0], &h[1],&h[2]};
+	
+	struct Human * p[3];
+	p[0] = &h[0];
+	p[1] = &h[1];
+	p[2] = &h[2];
+	
+	p[0]-> age = p[0] -> age + 3;
+	p[1]-> age = p[0] -> age + p[1]->age;
+	p[2]-> age = p[1] -> age + p[2] -> age;
+	printf("%d %d %d", h[0].age,h[1].age,h[2].age);
+	return 0;
+}
+
+6.
+#include <stdio.h>
+struct Node {
+	int value;
+	struct Node * next;
+};
+
+int main(){
+	struct Node n1 = { 10, NULL};
+	struct Node n2 = { 20, NULL};
+	struct Node n3 = { 30, NULL};
+	
+	n1.next = &n2;
+	n2.next = &n3;
+	struct Node newNode = { 15, NULL };
+	newNode.next = n1.next;
+	n1.next = &newNode;
+	struct Node *p = &n1;
+	while( p != NULL){
+		printf("%d ", p->value);
+		p = p->next;
+	}
+	return 0;
+}
+
+타입 재정의, 구조체 중첩
+
+1. 
+#include <stdio.h>
+typedef int S;
+
+int main(){
+	S a= 5;
+	printf("%d", a);
+	return 0;
+}
+
+2.
+#include <stdio.h>
+typedef struct{
+	char name[20];
+	int age;
+} Human;
+
+int main(){
+	Human h1 = {"Kim", 25};
+	Human h2 = h1;
+	h2.age = h2.age + 5;
+	printf("%d %d", h1.age, h2.age);
+	return 0;
+}
+
+3.
+#include <stdio.h>
+typedef struct {
+	char juso[20];
+	int zip;
+} Addr;
+typedef struct{
+	char name[20];
+	int age;
+	Addr ad;
+} Human;
+
+int main(){
+	Human h1 = {"Kim", 25, "Gwangu", 67720};
+	h1.ad.zip = h1.ad.zip + 10;
+	printf("%d", h1.ad.zip);
+	return 0;
+}
+
+4.
+#include <stdio.h>
+typedef struct {
+	int fil;
+	int sil;
+} Jumsu;
+typedef struct{
+	char name[20];
+	Jumsu j;
+} Human;
+
+int main(){
+	Human h1 = {"Kim", 76, 66};
+	int hap = 0;
+	h1.j.fil += 15;
+	h1.j.sil += 20;
+	hap = h1.j.fil + h1.j.sil;
+	printf("%d %d %d", h1.j.fil, h1.j.sil, hap);
+	return 0;
+}
+
+공용체
+
+1.
+#include <stdio.h>
+union Num{
+	int i;
+	float f;
+};
+
+int main(){
+	union Num n;
+	n.i = 10;
+	printf("%d, ", n.i);
+	n.f = 3.5f;
+	printf("%.1f\n", n.f);
+	printf("%d", sizeof(n));
+	return 0;
+}
+
+2. 
+#include <stdio.h>
+union Num{
+	int i;
+	int j;
+};
+
+int main(){
+	union Num n;
+	n.i = 10;
+	n.j = 20;
+	printf("%d %d\n", n.i, n.j);
+	printf("%d", sizeof(n));
+	return 0;
+}
+
+3. 
+#include <stdio.h>
+union Data{
+	int i;
+	char c;
+};
+
+int main(){
+	union Data d[2];
+	d[0].i = 10;
+	d[1].i = 20;
+	d[0].c = 'A';
+	printf("%d %d\n", d[0].i, d[1].i);
+	printf("%c", d[0].c);
+	return 0;
+}
+
+
+프로세스 ( fork )
+1.
+
+#include <stdio.h>
+#include <unistd.h>
+int main(){
+	int a = 0;
+	fork();
+	a = 1;
+	printf("%d\n", a);
+	return 0;
+}
+
+2.
+#include <stdio.h>
+#include <unistd.h>
+int main(){
+	pid_t id;
+	int a = 0;
+	id = fork();
+	if (id > 0){
+		a = 1;
+		printf("부모 : %d\n", a);
+	} else if( id == 0){
+		a = 2;
+		printf("자식 : %d\n", a);
+	} else{
+		printf("실패");
+	}
+	return 0;
+}
